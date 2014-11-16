@@ -35,7 +35,8 @@ public class JobScheduling {
 		
 		Prozessorliste pListe = new Prozessorliste(MAXP);
 		
-		pListe.unsorted(jobDauern);
+		pListe.unsorted1(jobDauern);
+		System.out.println("Alorithmus: unsortiert");
 		for (int i = 0; i < MAXP.length; i++) {
 			MAXP[i].druckeZeile();
 		}
@@ -43,31 +44,31 @@ public class JobScheduling {
 		pListe.resetAll(MAXP);
 		
 		System.out.println("");
-/*
+
 		
-		
+		//ascending
 		pListe.ascending(jobDauern);
+		
 		for (int i = 0; i < MAXP.length; i++) {
 			MAXP[i].druckeZeile();
 		}
-		System.out.println("laengste dauer");
+		System.out.println("Laengste Gesamtdauer: " + pListe.hoechsteDauer());
 		pListe.resetAll(MAXP);
 		
 		System.out.println("");
-		
 		
 		
 		pListe.descending(jobDauern);
 		for (int i = 0; i < MAXP.length; i++) {
 			MAXP[i].druckeZeile();
 		}
-		System.out.println("laengste dauer");
+		System.out.println("Laengste Gesamtdauer: " + pListe.hoechsteDauer());
 		pListe.resetAll(MAXP);
 		
 		System.out.println("");
 		
 		
-		
+/*		
 		pListe.random(jobDauern);
 		for (int i = 0; i < MAXP.length; i++) {
 			MAXP[i].druckeZeile();
