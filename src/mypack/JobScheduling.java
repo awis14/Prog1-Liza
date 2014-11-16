@@ -1,23 +1,12 @@
 package mypack;
 
+import java.lang.reflect.Array;
+
 public class JobScheduling {
 
-	/*public static void startScheduling (int numberOfProcessors, int numberOfJobs) {
-		for (int i = 0; i < numberOfProcessors; i++) {
-			Prozessor p = new Prozessor(i);
-			System.out.println(p.nr);
-		}
-	}
-		*/
-	
-	
 	public static void main(String[] args) {
 		
-		//startScheduling(3, 6);
-		//startScheduling(10, 100);
-		
 		int[] jobDauern = new int[] {5, 3, 3, 4, 8, 3};
-		
 		
 		Prozessor p0 = new Prozessor();
 		Prozessor p1 = new Prozessor();
@@ -28,38 +17,49 @@ public class JobScheduling {
 		Prozessorliste pListe = new Prozessorliste(MAXP);
 		
 		pListe.unsorted(jobDauern);
-
-		for (int i = 0; i < jobDauern.length; i++) {
-			System.out.print(jobDauern[i] + " ");
+		for (int i = 0; i < MAXP.length; i++) {
+			MAXP[i].druckeZeile();
 		}
+		System.out.println("laengste dauer");
+		pListe.resetAll(MAXP);
 		
 		System.out.println("");
-		MAXP[0].druckeZeile();
-		MAXP[1].druckeZeile();
-		MAXP[2].druckeZeile();
-		Prozessorliste.resetAll(MAXP);
+
 		
-		System.out.println("\n");
-		/*
-		pListe.ascending(MAXP);
-		for (int i = 0; i < jobDauern.length; i++) {
-			System.out.print(jobDauern[i] + " ");
+		
+		pListe.ascending(jobDauern);
+		for (int i = 0; i < MAXP.length; i++) {
+			MAXP[i].druckeZeile();
 		}
-		System.out.println(" ");
-		MAXP[0].druckeZeile();
-		MAXP[1].druckeZeile();
-		MAXP[2].druckeZeile();
-		Prozessorliste.resetAll(MAXP);
-		System.out.println("\n");
-		Prozessorliste.descending(jobDauern, MAXP);
-		System.out.println(" ");
-		MAXP[0].druckeZeile();
-		MAXP[1].druckeZeile();
-		MAXP[2].druckeZeile();
-		System.out.println("\n");
-		Prozessorliste.resetAll(MAXP);
+		System.out.println("laengste dauer");
+		pListe.resetAll(MAXP);
 		
-		*/
+		System.out.println("");
+		
+		
+		
+		pListe.descending(jobDauern);
+		for (int i = 0; i < MAXP.length; i++) {
+			MAXP[i].druckeZeile();
+		}
+		System.out.println("laengste dauer");
+		pListe.resetAll(MAXP);
+		
+		System.out.println("");
+		
+		
+		
+		pListe.random(jobDauern);
+		for (int i = 0; i < MAXP.length; i++) {
+			MAXP[i].druckeZeile();
+		}
+		System.out.println("laengste dauer");
+		System.out.println("");
+		
+		
+		
+		
+
 	}
 
 }
