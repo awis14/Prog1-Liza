@@ -3,7 +3,7 @@ package mypack;
 public class Prozessor {
 	
 	private static int countProcessors = 0;
-	private static int geringsteAuslastung = 0;
+	private int auslastung = 0;
 	private int nr;
 	private int[] jobs;
 	
@@ -14,23 +14,10 @@ public class Prozessor {
 	}
 	
 	public int berechneAktuelleDauer () {
-		int aktDauer = 0;
 		for (int i = 0; i < this.jobs.length; i++) {
-			aktDauer = aktDauer + jobs[i];
+			this.auslastung = this.auslastung + jobs[i];
 		}
-		return aktDauer;
-	}
-	
-	public int getNr () {
-		return nr;
-	}
-	
-	public int berechneGesamtDauer(int[] jobs) {
-		int gesamtdauer = 0;
-		for (int i = 0; i < jobs.length; i++) {
-			gesamtdauer = gesamtdauer + jobs[i];
-		}
-		return gesamtdauer;
+		return this.auslastung;
 	}
 	
 	public boolean laengereDauer (Prozessor p) {
@@ -41,29 +28,16 @@ public class Prozessor {
 		}
 	}
 	
-	public void addJob (int newJobTime) {
+	public void hinzufuegenJob (int neueJobdauer) {
 		int newLength = this.jobs.length + 1;
 		int[] copyJobs = new int[newLength];
 		for (int i = 0; i < this.jobs.length; i++) {
 			copyJobs[i] = jobs[i];
 		}
 		this.jobs = new int[newLength];
-		copyJobs[newLength - 1] = newJobTime;
+		copyJobs[newLength - 1] = neueJobdauer;
 		this.jobs = copyJobs.clone();
 	}
-	
-	/*
-	public static Prozessor compProcessor(Prozessor[] MAXP) {
-		for (int i = 0; i < MAXP.length; i++) {
-			if ( MAXP[i].berechneAktuelleDauer() <= geringsteAuslastung ) {
-				System.out.println(MAXP[i].berechneAktuelleDauer() + " <= " + geringsteAuslastung );
-				geringsteAuslastung = MAXP[i].berechneAktuelleDauer();
-				return MAXP[i];
-			}
-		}
-		return MAXP[0];
-	}
-	*/
 	
 	public String druckeJobs(int[] jobs) {
 		String jobString = " ";
@@ -80,8 +54,8 @@ public class Prozessor {
 	}
 	
 	public void druckeZeile() {
-		System.out.println("Prozessor " + this.nr + ":" + druckeJobs(jobs) 
-				          + "Gesamtdauer: " + berechneGesamtDauer(jobs));
+		System.out.println("Prozessor " + this.nr + ":" + druckeJobs(this.jobs) 
+				          + "Gesamtdauer: " + berechneAktuelleDauer());
 	}
 	
 	public void reset() {
