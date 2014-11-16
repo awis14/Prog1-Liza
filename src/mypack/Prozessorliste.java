@@ -6,49 +6,52 @@ public class Prozessorliste {
 	private int geringsteAuslastung = 0;
 	private int hoechsteDauer = 0;
 	private int kuerzesteDauer = 90;
-	private Prozessor p;
-	private int hilfe;
+	private int p;
+	private Prozessor hilfe;
 	private static int processor = 0;
 	
 	Prozessorliste(Prozessor[] MAXP) {
 		this.MAXP = new Prozessor[MAXP.length];
+		this.MAXP = MAXP;
 	}
 
 	 public void unsorted1 (int[] jobDauern) {
 		for (int i = 0; i < jobDauern.length; i++) {
-			//Prozessor p = kuerzesteDauer();
-			System.out.println(MAXP[i].berechneAktuelleDauer());
-			hilfe = kuerzesteDauer1();
-			p.hinzufuegenJob(jobDauern[i]);
+			p = kuerzesteDauer1();
+			System.out.println("add " + jobDauern[i] + " zu prozessor " + p );
+			MAXP[p].hinzufuegenJob(jobDauern[i]);
 		}	
 	}
 
-	
+	public int kuerzesteDauer1() {
+			System.out.println("berechne kuerzesteDauer ----------------------");
+			for (int i = 0; i < MAXP.length; i++) {
+				 if (MAXP[i].berechneAktuelleDauer() == 0 ) {
+					 //System.out.println("aktuelle dauer = 0");
+					 return i;
+				 } else if (MAXP[i].berechneAktuelleDauer() < kuerzesteDauer) {
+					 System.out.println("aktuelle dauer " + MAXP[i].berechneAktuelleDauer() + " < " + kuerzesteDauer);
+					 kuerzesteDauer = MAXP[i].berechneAktuelleDauer();
+					 p = i;
+				 }
+			}
+			System.out.println("hilfe gleich i: " + p);
+			return p;
+	}
+
+	 
 	public Prozessor kuerzesteDauer() {
 		for (int i = 0; i < MAXP.length; i++) {
 			 if (MAXP[i].berechneAktuelleDauer() == 0 ) {
-				 p = MAXP[i];
-				 return p;
+				 hilfe = MAXP[i];
+				 return hilfe;
 			 } else if (MAXP[i].berechneAktuelleDauer() < kuerzesteDauer) {
-				 p = MAXP[i];
+				 hilfe = MAXP[i];
 			 }
 		}
-		return p;
-	}
-	 
-	public int kuerzesteDauer1() {
-		for (int i = 0; i < MAXP.length; i++) {
-			 if (MAXP[i].berechneAktuelleDauer() == 0 ) {
-				 System.out.println("aktuelle dauer = 0");
-				 return i;
-			 } else if (MAXP[i].berechneAktuelleDauer() < kuerzesteDauer) {
-				 System.out.println("aktuelle dauer " + MAXP[i].berechneAktuelleDauer() + " < " + kuerzesteDauer);
-				 hilfe = i;
-			 }
-		}
-		System.out.println("hilfe gleich i: " +hilfe);
 		return hilfe;
 	}
+	 
 
 	
 	
