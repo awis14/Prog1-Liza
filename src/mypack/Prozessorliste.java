@@ -1,5 +1,8 @@
 package mypack;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Prozessorliste {
 	
 	private Prozessor[] MAXP;
@@ -23,7 +26,34 @@ public class Prozessorliste {
 		}	
 	}
 
+	public void ascending(int[] jobDauern) {
+		java.util.Arrays.sort(jobDauern);
+		for (int i = 0; i < jobDauern.length; i++) {
+			p = kuerzesteDauer1();
+			System.out.println("add " + jobDauern[i] + " zu prozessor " + p );
+			MAXP[p].hinzufuegenJob(jobDauern[i]);
+		}
+	}
+	 
+	
+	public void descending(int[] jobDauern) {
+		Integer copy[] = new Integer[jobDauern.length];
+		for (int i = 0; i < copy.length; i++) {
+			copy[i] = jobDauern[i];
+		}
+		Arrays.sort(copy, Collections.reverseOrder());
+		for (int i = 0; i < copy.length; i++) {
+			jobDauern[i] = copy[i];
+		}
+		for (int i = 0; i < jobDauern.length; i++) {
+			p = kuerzesteDauer1();
+			System.out.println("add " + jobDauern[i] + " zu prozessor " + p );
+			MAXP[p].hinzufuegenJob(jobDauern[i]);
+		}
+	}
+	 
 	public int kuerzesteDauer1() {
+		kuerzesteDauer = 90;
 			System.out.println("berechne kuerzesteDauer ----------------------");
 			for (int i = 0; i < MAXP.length; i++) {
 				 if (MAXP[i].berechneAktuelleDauer() == 0 ) {
