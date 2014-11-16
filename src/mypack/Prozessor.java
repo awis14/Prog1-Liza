@@ -3,21 +3,30 @@ package mypack;
 public class Prozessor {
 	
 	private static int countProcessors = 0;
-	private int auslastung = 0;
+	private int auslastung;
 	private int nr;
 	private int[] jobs;
 	
 	Prozessor () {
+		this.auslastung = 0;
 		this.jobs = new int[0];
 		this.nr = countProcessors;
 		countProcessors++;	
 	}
 	
 	public int berechneAktuelleDauer () {
+		int aktuelleDauer = 0;
 		for (int i = 0; i < this.jobs.length; i++) {
-			this.auslastung = this.auslastung + jobs[i];
+			aktuelleDauer  = aktuelleDauer + this.jobs[i];
 		}
-		return this.auslastung;
+		return aktuelleDauer ;
+	}
+	
+	public int gesamtDauer() {
+		for (int i = 0; i < this.jobs.length; i++) {
+			this.auslastung = this.auslastung + this.jobs[i];
+		}
+		return this.auslastung;		
 	}
 	
 	public boolean laengereDauer (Prozessor p) {
